@@ -1,0 +1,18 @@
+ulimit -a
+
+先看init函数，再看main函数
+
+
+proxy--》userId -->chan result
+||     || 
+redis->result队列，redis
+||       ||
+layer逻辑层
+
+
+1.用户1请求抢购接口，生成A1，一个result chan。 select A1 -->异步
+2.map[1_1]=A1
+3.获取Redis的结果，拼成userId_ProductId的key
+4.通过这个key，获取到A1
+5.把redis中的结果写入A1这个管道
+管道和用户一一对应
